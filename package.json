@@ -1,0 +1,61 @@
+{
+  "name": "bskt",
+  "version": "1.0.0",
+  "description": "Bskt Token for crypto currency",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "bootstrap": "rm -rf node_modules && npm cache clean --force && if [ ! -f \"config/secrets.json\" ]; then mkdir -p config && cp config-examples/secrets.example.json config/secrets.json; fi && if [ ! -f \"config/deploy-config.js\" ]; then mkdir -p config && cp config-examples/deploy-config.example.js config/deploy-config.js; fi && npm i",
+    "lint": "solium --dir ./contracts",
+    "test:prep": "npm run lint && npm run ganache-cli:dev",
+    "test:e2eprep": "npm run update-module && node scripts/compile-contract.js",
+    "test:js": "npm run test:prep && truffle test --network rpc ./test/BsktToken.test.js",
+    "test:sol": "npm run test:prep && truffle test --network rpc ./test/TestBsktToken.sol",
+    "test:e2e": "npm run test:e2eprep && npm run test:prep && TEST_ENV=e2e truffle test --network rpc ./test/E2E.test.js",
+    "test:js:gas": "GAS_REPORTER=true npm run test:js",
+    "test": "npm run test:prep && npm run test:js && npm run test:sol",
+    "ganache-cli:dev": "scripts/ganache-cli.sh",
+    "ganache-cli:coverage": "SOLIDITY_COVERAGE=true scripts/ganache-cli.sh",
+    "cover": "npm run ganache-cli:coverage && ./node_modules/.bin/solidity-coverage",
+    "update-module": "git submodule update --init && git submodule foreach git pull origin master"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bluebird": "^3.5.1",
+    "checksum": "^0.1.1",
+    "eth-gas-reporter": "^0.1.1",
+    "ether-pudding": "^3.2.0",
+    "ganache-cli": "^6.0.3",
+    "glob": "^7.1.2",
+    "jsonfile": "^4.0.0",
+    "mkdirp": "^0.5.1",
+    "npm-install-version": "^6.0.2",
+    "solc": "^0.4.19",
+    "solidity-coverage": "^0.4.9",
+    "solium": "^1.1.3",
+    "truffle": "=4.1.3",
+    "truffle-artifactor": "^3.0.3",
+    "truffle-config": "^1.0.4",
+    "truffle-contract": "^3.0.3",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "0.20.4",
+    "yarn": "^1.5.1"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "npm": "^5.7.1",
+    "zeppelin-solidity": "1.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptofinlabs/bskt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cryptofinlabs/bskt/issues"
+  },
+  "homepage": "https://github.com/cryptofinlabs/bskt#readme"
+}

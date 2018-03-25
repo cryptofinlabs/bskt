@@ -1,0 +1,3 @@
+[submodule "underlying-token-contracts"]
+	path = underlying-token-contracts
+	url = git@github.com:cryptofinlabs/underlying-token-contracts.git
