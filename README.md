@@ -4,6 +4,8 @@ Bskt is a generic smart contract that allows the composition of any number of Et
 
 These new tokens can be created by anyone who surrenders the underlying tokens and redeemed by anyone who owns issued tokens. Bskt allows investors to diversify their exposure to tokens in the Ethereum ecosystem without adding custody risk.
 
+See the [whitepaper](https://github.com/cryptofinlabs/bskt-whitepaper) for more details.
+
 ## Usage
 The steps for creating and redeeming Bskts are outlined here. A dapp which abstracts most of this away will be available here.
 
@@ -19,7 +21,7 @@ The steps for creating and redeeming Bskts are outlined here. A dapp which abstr
   - The Bskt contract burns the tokens and uses the ERC20 `transfer` function to transfer underlying tokens to the redeemer
 
 ## Documentation
-The main functions provided in this contract are detailed below.  See the whitepaper for more details.
+The main functions provided in this contract are detailed below.
 
 #### `BsktToken(address[] addresses, uint256[] quantities, uint256 _creationUnit, string _name, string _symbol)`
 Initializes contract with a list of ERC20 token addresses and corresponding minimum number of units required for a creation unit.
