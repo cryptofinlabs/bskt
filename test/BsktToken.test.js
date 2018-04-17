@@ -307,7 +307,7 @@ contract('BsktToken', function([owner, buyer1, buyer2, bskt20Buyer]) {
         assert.equal(ownerBalanceStart.toNumber(), ownerBalanceEnd.toNumber());
       });
 
-      conditionalIt('should not withdraw for non-owner', async function test() {
+      conditionalIt('should not withdraw tokens for non-owner', async function test() {
         const token = tokenInstances[0];
         const buyer1BalanceStart = await token.balanceOf(buyer1);
 
@@ -345,31 +345,6 @@ contract('BsktToken', function([owner, buyer1, buyer2, bskt20Buyer]) {
         const ownerTokenBalance = await otherToken.balanceOf(owner);
 
         assert.equal(ownerTokenBalance, 1000);
-      });
-
-      conditionalIt('should be able to receive ether', async function test() {
-        const bskt20TokenBalanceStart = await web3.eth.getBalance(bskt20Token.address);
-
-        const value = web3.toWei(1, 'ether');
-        await web3.eth.sendTransaction({from: buyer2, to: bskt20Token.address, value: value});
-
-        const bskt20TokenBalanceEnd = await web3.eth.getBalance(bskt20Token.address);
-
-        assert.equal(bskt20TokenBalanceEnd - bskt20TokenBalanceStart, value);
-      });
-
-      // This test will break if gas cost of transactions are greater than the amount locked and withdrawn
-      conditionalIt('should recover ether sent to contract', async function test() {
-        const ownerBalanceStart = await web3.eth.getBalance(owner);
-
-        await web3.eth.sendTransaction({from: buyer1, to: bskt20Token.address, value: web3.toWei(1, 'ether')});
-        await bskt20Token.withdrawEther();
-
-        const ownerBalanceEnd = await web3.eth.getBalance(owner);
-        const bskt20TokenBalance = await web3.eth.getBalance(bskt20Token.address);
-
-        assert.isAbove(ownerBalanceEnd.toNumber(), ownerBalanceStart.toNumber());
-        assert.equal(bskt20TokenBalance, 0 );
       });
 
     });

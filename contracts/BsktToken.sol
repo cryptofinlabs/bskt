@@ -227,16 +227,4 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
         require(erc20.transfer(owner, withdrawAmount));
     }
 
-    /// @notice Owner: Withdraw Ether
-    function withdrawEther()
-        external
-        onlyOwner
-    {
-        owner.transfer(this.balance);
-    }
-
-    /// @notice Fallback function
-    function() external payable {
-    }
-
 }

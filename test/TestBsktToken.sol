@@ -31,7 +31,7 @@ contract ExposedBsktToken is BsktToken {
 contract TestBsktToken {
 
     ExposedBsktToken bskt;
-    address account1 = address(0xdeae3325a66eb9b9ea83b404dc10fd7c2946ece9);
+    address account1 = address(0xDEAe3325A66EB9B9Ea83b404dC10FD7c2946Ece9);
 
     /// @dev beforeEach is causing an out of gas error, so using setup() instead for now
     function beforeEach() public {
@@ -103,9 +103,5 @@ contract TestBsktToken {
         Assert.equal(_bskt.balanceOf(account1), amountToMint - amountToBurn, "account balance should be equal");
         Assert.equal(_bskt.totalSupply(), amountToMint - amountToBurn, "total supply should be equal");
     }
-
-    // TODO: test _transferUnderlyingTokensWhenCreate
-
-    // TODO: test _transferUnderlyingTokensWhenRedeem
 
 }
