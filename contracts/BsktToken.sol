@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity 0.4.21;
 
 
 import "zeppelin-solidity/contracts/lifecycle/Pausable.sol";
@@ -174,7 +174,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
     function mint(address to, uint256 amount) internal returns (bool) {
         totalSupply_ = totalSupply_.add(amount);
         balances[to] = balances[to].add(amount);
-        Mint(to, amount);
+        emit Mint(to, amount);
         Transfer(address(0), to, amount);
         return true;
     }
@@ -186,7 +186,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
     function burn(address from, uint256 amount) internal returns (bool) {
         totalSupply_ = totalSupply_.sub(amount);
         balances[from] = balances[from].sub(amount);
-        Burn(from, amount);
+        emit Burn(from, amount);
         Transfer(from, address(0), amount);
         return true;
     }
