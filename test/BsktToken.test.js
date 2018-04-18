@@ -115,8 +115,8 @@ contract('BsktToken', function([owner, buyer1, buyer2, bskt20Buyer]) {
       //assert.equal(txReceipt.logs.length, 4, 'logs should be created');
       assert.equal(txReceipt.logs[0].event, 'Transfer', 'did not log transfer event');
       assert.equal(txReceipt.logs[1].event, 'Transfer', 'did not log transfer event');
-      assert.equal(txReceipt.logs[2].event, 'Mint', 'did not log mint event');
-      assert.equal(txReceipt.logs[3].event, 'Transfer', 'did not log transfer event');
+      assert.equal(txReceipt.logs[2].event, 'Transfer', 'did not log transfer event');
+      assert.equal(txReceipt.logs[3].event, 'Create', 'did not log create event');
 
       const contractTokenABalance = await tokenA.balanceOf(bsktToken.address);
       const contractTokenBBalance = await tokenB.balanceOf(bsktToken.address);
@@ -212,10 +212,10 @@ contract('BsktToken', function([owner, buyer1, buyer2, bskt20Buyer]) {
       const contractTokenBBalance = await tokenB.balanceOf.call(bsktToken.address);
 
       //assert.equal(txReceipt.logs.length, 4, 'logs should be created');
-      assert.equal(txReceipt.logs[0].event, 'Burn', 'did not log mint event');
+      assert.equal(txReceipt.logs[0].event, 'Transfer', 'did not log transfer event');
       assert.equal(txReceipt.logs[1].event, 'Transfer', 'did not log transfer event');
       assert.equal(txReceipt.logs[2].event, 'Transfer', 'did not log transfer event');
-      assert.equal(txReceipt.logs[3].event, 'Transfer', 'did not log transfer event');
+      assert.equal(txReceipt.logs[3].event, 'Redeem', 'did not log redeem event');
 
       assert.equal(tokenAPostBalance - tokenAPreBalance, 50, 'buyer1 did not redeem tokenA balance correctly');
       assert.equal(tokenBPostBalance - tokenBPreBalance, 100, 'buyer1 did not redeem tokenB balance correctly');
