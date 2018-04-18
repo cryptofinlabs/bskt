@@ -72,7 +72,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable, ReentrancyGuard {
         string _name,
         string _symbol
     ) DetailedERC20(_name, _symbol, 18) public {
-        require(0 < addresses.length && addresses.length < 256);
+        require(addresses.length > 0);
         require(addresses.length == quantities.length);
         require(_creationUnit >= 1);
 
