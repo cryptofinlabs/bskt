@@ -42,8 +42,8 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
     uint256 public creationUnit;
     TokenInfo[] public tokens;
 
-    event Mint(address indexed to, uint256 amount);
-    event Burn(address indexed from, uint256 amount);
+    event Create(address indexed creator, uint256 amount);
+    event Redeem(address indexed redeemer, uint256 amount, address[] skippedTokens);
 
     /// @notice Requires value to be divisible by creationUnit
     /// @param value Number to be checked
@@ -112,6 +112,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
         }
 
         mint(msg.sender, baseUnits);
+        emit Create(msg.sender, baseUnits);
     }
 
     /// @notice Redeems Bskt tokens in exchange for underlying tokens
@@ -147,6 +148,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
             uint256 amount = baseUnits.div(creationUnit).mul(token.quantity);
             require(erc20.transfer(msg.sender, amount));
         }
+        emit Redeem(msg.sender, baseUnits, tokensToSkip);
     }
 
     /// @return addresses Underlying token addresses
@@ -174,8 +176,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
     function mint(address to, uint256 amount) internal returns (bool) {
         totalSupply_ = totalSupply_.add(amount);
         balances[to] = balances[to].add(amount);
-        emit Mint(to, amount);
-        Transfer(address(0), to, amount);
+        emit Transfer(address(0), to, amount);
         return true;
     }
 
@@ -186,8 +187,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
     function burn(address from, uint256 amount) internal returns (bool) {
         totalSupply_ = totalSupply_.sub(amount);
         balances[from] = balances[from].sub(amount);
-        emit Burn(from, amount);
-        Transfer(from, address(0), amount);
+        emit Transfer(from, address(0), amount);
         return true;
     }
 
