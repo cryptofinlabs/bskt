@@ -1,6 +1,7 @@
 pragma solidity 0.4.21;
 
 
+import "zeppelin-solidity/contracts/ReentrancyGuard.sol";
 import "zeppelin-solidity/contracts/lifecycle/Pausable.sol";
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import "zeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
@@ -31,7 +32,7 @@ library AddressArrayUtils {
 /// anyone. To create, a user must approve the contract to move the underlying
 /// tokens, then call `create`.
 /// @author Cryptofin
-contract BsktToken is StandardToken, DetailedERC20, Pausable {
+contract BsktToken is StandardToken, DetailedERC20, Pausable, ReentrancyGuard {
     using SafeMath for uint256;
     using AddressArrayUtils for address[];
 
@@ -210,6 +211,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable {
     function withdrawExcessToken(address token)
         external
         onlyOwner
+        nonReentrant
     {
         ERC20 erc20 = ERC20(token);
         uint256 withdrawAmount;
