@@ -229,4 +229,16 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable, ReentrancyGuard {
         require(erc20.transfer(owner, withdrawAmount));
     }
 
+    /// @dev Prevent Bskt tokens from being sent to the Bskt contract
+    function transfer(address _to, uint256 _value) public returns (bool) {
+        require(_to != address(this));
+        return super.transfer(_to, _value);
+    }
+
+    /// @dev Prevent Bskt tokens from being sent to the Bskt contract
+    function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
+        require(_to != address(this));
+        return super.transferFrom(_from, _to, _value);
+    }
+
 }
