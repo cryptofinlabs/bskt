@@ -246,6 +246,28 @@ contract('BsktToken', function([owner, buyer1, buyer2, bskt20Buyer]) {
         assertRevert(e);
       }
     });
+
+    conditionalIt('should not transfer Bskt tokens to Bskt contract', async function test() {
+      try {
+        await bsktToken.create(100, {from: buyer1});
+        await bsktToken.transfer(bsktToken.address, 100, {from: buyer1});
+        assert.fail(false, 'cannot transfer Bskt tokens to Bskt contract');
+      } catch(e) {
+        assertRevert(e);
+      }
+    });
+
+    conditionalIt('should not transfer Bskt tokens to Bskt contract using transferFrom', async function test() {
+      try {
+        await bsktToken.create(100, {from: buyer1});
+        await bsktToken.approve(buyer2, 100, {from: buyer1});
+        await bsktToken.transferFrom(buyer1, bsktToken.address, 100, {from: buyer2});
+        assert.fail(false, 'cannot transfer Bskt tokens to Bskt contract using transferFrom');
+      } catch(e) {
+        assertRevert(e);
+      }
+    });
+
   });
 
   context('With 20 underlying tokens', function () {
