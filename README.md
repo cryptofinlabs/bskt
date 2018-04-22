@@ -1,6 +1,6 @@
-# Bskt Token
+# Bskt
 
-Bskt is a generic smart contract that allows the composition of any number of Ethereum crypto tokens. Bskt facilitates the bundling and unbundling of a collection of Ethereum ERC20 tokens in exchange for a new ERC20 token. Owners of the new token have a direct claim on the underlying tokens. Unlike more traditional funds, custody is held by the smart contract.
+Bskt is a generic smart contract that creates decentralized token portfolios. Bskt facilitates the bundling and unbundling of a collection of ERC20 tokens in exchange for a new ERC20 token. Owners of the new token have a direct claim on the underlying tokens. Unlike traditional funds, custody is held by the smart contract.
 
 These new tokens can be created by anyone who surrenders the underlying tokens and redeemed by anyone who owns issued tokens. Bskt allows investors to diversify their exposure to tokens in the Ethereum ecosystem without adding custody risk.
 

@@ -31,7 +31,7 @@ library AddressArrayUtils {
 /// @notice Bskt tokens are transferable, and can be created and redeemed by
 /// anyone. To create, a user must approve the contract to move the underlying
 /// tokens, then call `create`.
-/// @author Cryptofin
+/// @author CryptoFin
 contract BsktToken is StandardToken, DetailedERC20, Pausable, ReentrancyGuard {
     using SafeMath for uint256;
     using AddressArrayUtils for address[];
@@ -205,7 +205,7 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable, ReentrancyGuard {
         return (0, false);
     }
 
-    /// @notice Owner: Withdraw excess funds which don't belong to Bskt Token
+    /// @notice Owner: Withdraw excess funds which don't belong to Bskt token
     /// holders
     /// @param token ERC20 token address to withdraw
     function withdrawExcessToken(address token)
@@ -230,12 +230,17 @@ contract BsktToken is StandardToken, DetailedERC20, Pausable, ReentrancyGuard {
     }
 
     /// @dev Prevent Bskt tokens from being sent to the Bskt contract
+    /// @param _to The address to transfer tokens to
+    /// @param _value the amount of tokens to be transferred
     function transfer(address _to, uint256 _value) public returns (bool) {
         require(_to != address(this));
         return super.transfer(_to, _value);
     }
 
     /// @dev Prevent Bskt tokens from being sent to the Bskt contract
+    /// @param _from The address to transfer tokens from
+    /// @param _to The address to transfer to
+    /// @param _value The amount of tokens to be transferred
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
         require(_to != address(this));
         return super.transferFrom(_from, _to, _value);
