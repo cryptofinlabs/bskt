@@ -1,7 +1,7 @@
 {
-  "name": "bskt",
-  "version": "1.0.0",
-  "description": "Bskt Token for crypto currency",
+  "name": "Bskt",
+  "version": "1.0.1",
+  "description": "Bskt is a generic smart contract that creates decentralized token portfolios. Bskt facilitates the bundling and unbundling of a collection of ERC20 tokens in exchange for a new ERC20 token.",
   "directories": {
     "example": "examples",
     "test": "test"
